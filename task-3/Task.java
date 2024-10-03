@@ -1,17 +1,39 @@
 package com.zoho.task;
-import java.util.Scanner;
+import com.zoho.exceptions.CustomException;
+import java.util.ArrayList;
 public class Task{
-	Scanner sc=new Scanner(System.in);
-	public int findLength(String string){
+	public void isNull(String string) throws CustomException{
+		if(string==null){
+			throw new CustomException("null string is not allowed");
+		}
+	}
+	public void isCharNull (char ch) throws CustomException{
+		if(ch=='\u0000'){
+			throw new CustomException("null character is not allowed");	
+		}
+	}
+	public void bounds(int index,int l) throws CustomException{
+		if(index>l || index<0){
+			throw new CustomException("index out of bounds,enter valid input ");	
+		}
+	}	 
+	public int findLength(String string) throws CustomException{
+		isNull(string);
       	return string.length();
       }
-	public char[] charArray(String string){
+	public char[] charArray(String string) throws CustomException{
+		isNull(string);
 		return string.toCharArray();
 	}
-	public char penultimate(String string){
-		return string.charAt(string.length()-2);
+	public char penultimate(String string)throws CustomException{
+		isNull(string);
+		int length=findLength(string);
+		bounds(length-2,length);
+		return string.charAt(length-2);
 	}
-	public int occurence(String string,char ch){
+	public int occurence(String string,char ch)throws CustomException{
+		isNull(string);
+		isCharNull(ch);
 		char array[]=string.toCharArray();		
 		int count=0;
 		for(char character:array){
@@ -21,79 +43,89 @@ public class Task{
 		}
 		return count;
 	}
-	public int greatestPosition(String string,char ch){
+	public int greatestPosition(String string,char ch)throws CustomException{
+		isNull(string);
+		isCharNull(ch);
 		return string.lastIndexOf(ch);
 	}
       
-	public String lastFiveCharacter(String string){
-		int length=string.length();
-		return string.substring(length-5,length);
+	public String lastNCharacter(String string,int n)throws CustomException{
+		isNull(string);
+		int length=findLength(string);
+		bounds(length-n,length);
+		return string.substring(length-n,length);
 	}
-	public String firstThreeCharacter(String string){
-		return string.substring(0,3);
+	public String firstNCharacter(String string,int n)throws CustomException{
+		isNull(string);
+		int length=findLength(string);
+		bounds(n,length);
+		return string.substring(0,n);
 	}
-	public String replaceWithXYZ(String string){
-		return string.replace(string.substring(0,3),"XYZ");
+	public String replaceWithString(String string,String substitute)throws CustomException{
+		isNull(string);
+		isNull(substitute);
+		int index=findLength(substitute);
+		int length=findLength(string);
+		bounds(index,length);
+		return string.replace(string.substring(0,index),substitute);
 	}
-	public boolean startsWithEnt(String string){
-		return string.startsWith("ent");
+	public boolean startsWithString(String string,String starts)throws CustomException{
+		isNull(string);
+		isNull(starts);
+		return string.startsWith(starts);
 	}
-	public boolean endsWithLe(String string){
-		return string.endsWith("le");
+	public boolean endsWithString(String string,String ends)throws CustomException{
+		isNull(string);
+		isNull(ends);
+		return string.endsWith(ends);
 	}
-	public String toUpper(String string){
+	public String toUpper(String string)throws CustomException{
+		isNull(string);
 		return string.toUpperCase();
 	}
-	public String toLower(String string){
+	public String toLower(String string)throws CustomException{
+		isNull(string);
 		return string.toLowerCase();
 	}
-	public String reverse(String string){
+	public String reverse(String string)throws CustomException{
+		isNull(string);
 		String OutputThirteen="";
 		char ch13;
-		for(int i=0;i<string.length();i++){
+		int length=findLength(string);
+		for(int i=0;i<length;i++){
 			ch13=	string.charAt(i);
 			OutputThirteen=ch13+OutputThirteen;
 		}
 		return OutputThirteen;
 	}
-	public String noSpace(String string){
+	public String noSpace(String string)throws CustomException{
+		isNull(string);
 		return string.replace(" ","");
 	}
-	public String[] toStringArray(String string){
-		return string.split(" ");
+	public String[] toStringArray(String string,String str)throws CustomException{
+		isNull(string);
+		isNull(str);
+		return string.split(str);
 	}
-	public  String stringMerge(){
-		String output17="";
-		for(int i=1;i<=6;i++){
-			System.out.println("enter the string"+i+":");
-			String input=sc.next();
-			if(i==6){
-				output17=output17+input;
-				break;
-			}
-		output17=output17+input+"-";
-		}
-		return output17;
+	public  String stringMerge(ArrayList<String> words,String sequence)throws CustomException{
+		isNull(sequence);
+		return String.join(sequence,words);
+		
 	}
-	public boolean equalCaseSensitive(String string1,String string2){
+	public boolean equalCaseSensitive(String string1,String string2)throws CustomException{
+		isNull(string1);
+		isNull(string2);
 		return string1.equals(string2);
 	}
 
-	public boolean equalCaseInSensitive(String string1,String string2){
+	public boolean equalCaseInSensitive(String string1,String string2)throws CustomException{
+		isNull(string1);
+		isNull(string2);
 		return string1.equalsIgnoreCase(string2);
 	}
-	public String removeSpacesFromBegAndEnd(String string){
-		int start=0,end=string.length(),i,j;
-		for(i=start;i<end;i++){
-			if(string.charAt(i)!=' ')
-				break;
-		}
-		for(j=end-1;j>=0;j--){
-			if(string.charAt(j)!=' ')
-				break;
-		}
-		return string.substring(i,j+1);
-
+	public String removeSpacesFromBegAndEnd(String string)throws CustomException{
+		isNull(string);
+		return string.trim();
 	}
 
 }
