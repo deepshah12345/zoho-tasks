@@ -34,8 +34,10 @@ public class StringRunner{
 		//TASK3     
 		System.out.println("enter the string:"); 
             String inputThree=sc.next();
+		System.out.println("enter the string:"); 
+		int index=sc.nextInt();
 		try{
-            System.out.println(task.penultimate(inputThree));
+            System.out.println(task.penultimate(inputThree,index));
 		}catch(CustomException ex){
 		System.out.println("exception occured:"+ex.getMessage());
 		}
@@ -88,10 +90,12 @@ public class StringRunner{
 		//task8
 		System.out.println("enter the string:");
 		String inputEight=sc.next();
+		System.out.println("enter the target string:"); 
+		String target=sc.next();
 		System.out.println("enter the string to be replaced:"); 
 		String replace=sc.next();
 		try{
-		System.out.println(task.replaceWithString(inputEight,replace));
+		System.out.println(task.replaceWithString(inputEight,target,replace));
 		}catch(CustomException ex){
 		System.out.println("exception occured:"+ex.getMessage());
 		}
