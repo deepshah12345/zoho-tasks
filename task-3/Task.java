@@ -16,6 +16,11 @@ public class Task{
 		if(index>l || index<0){
 			throw new CustomException("index out of bounds,enter valid input ");	
 		}
+	}
+	public void isContains(String target,String string) throws CustomException{
+		if(!string.contains(target)){
+			throw new CustomException("target string is not found");
+		}
 	}	 
 	public int findLength(String string) throws CustomException{
 		isNull(string);
@@ -25,11 +30,11 @@ public class Task{
 		isNull(string);
 		return string.toCharArray();
 	}
-	public char penultimate(String string)throws CustomException{
-		isNull(string);
+	public char penultimate(String string,int index)throws CustomException{
+		
 		int length=findLength(string);
-		bounds(length-2,length);
-		return string.charAt(length-2);
+		bounds(index,length);
+		return string.charAt(index);
 	}
 	public int occurence(String string,char ch)throws CustomException{
 		isNull(string);
@@ -50,24 +55,23 @@ public class Task{
 	}
       
 	public String lastNCharacter(String string,int n)throws CustomException{
-		isNull(string);
+		
 		int length=findLength(string);
 		bounds(length-n,length);
 		return string.substring(length-n,length);
 	}
 	public String firstNCharacter(String string,int n)throws CustomException{
-		isNull(string);
+	
 		int length=findLength(string);
 		bounds(n,length);
 		return string.substring(0,n);
 	}
-	public String replaceWithString(String string,String substitute)throws CustomException{
+	public String replaceWithString(String string,String target,String replace)throws CustomException{
+		
 		isNull(string);
-		isNull(substitute);
-		int index=findLength(substitute);
-		int length=findLength(string);
-		bounds(index,length);
-		return string.replace(string.substring(0,index),substitute);
+		isNull(target);
+		isContains(target,string);
+		return string.replace(target,replace);
 	}
 	public boolean startsWithString(String string,String starts)throws CustomException{
 		isNull(string);
@@ -88,15 +92,13 @@ public class Task{
 		return string.toLowerCase();
 	}
 	public String reverse(String string)throws CustomException{
-		isNull(string);
-		String OutputThirteen="";
-		char ch13;
+	
 		int length=findLength(string);
-		for(int i=0;i<length;i++){
-			ch13=	string.charAt(i);
-			OutputThirteen=ch13+OutputThirteen;
-		}
-		return OutputThirteen;
+		char[] reversedArray = new char[length];
+		for (int i = 0; i < length; i++) {
+        		reversedArray[i] = string.charAt(length - 1 - i);
+            }
+		return new String(reversedArray);
 	}
 	public String noSpace(String string)throws CustomException{
 		isNull(string);
