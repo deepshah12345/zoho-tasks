@@ -3,8 +3,7 @@ import com.zoho.exceptions.CustomException;
 import java.util.ArrayList;
 public class Task{
 	public void checkNull(String string) throws CustomException{
-		if(string==null){
-			
+		if(string==null){		
 			throw new CustomException("null string is not allowed");
 		}
 	}
