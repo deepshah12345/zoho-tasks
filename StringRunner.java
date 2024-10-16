@@ -11,9 +11,9 @@ public class StringRunner{
             Console console=System.console();
 		while(true){
 			System.out.println("----------------------------------------");
-			System.out.println("MAIN MENU");
-			//System.out.println("1.length of a String\n2.convert it into character Array\n3.penultimate character");
-			System.out.println("1.length of a String\n2.convert it into character Array\n3.penultimate character\n4.number of occurrences of a givenletter\n5.greatest position of the given letter\n6.last 5 characters of a given String\n7.first 3 characters of a given String\n8.replace the first 3 characters of a String with XYZ\n9.starts with ent\n10.check whether a String ends with le\n11.convert to uppercase\n12.convert to lowercase\n13.reverse a string\n14.accept a line with multiple Strings\n15. output a Single String without space\n16.each String into aString array\n17.merge each String with character sequence\n18.String are equal -case sensitive \n19.String are equal -case insensitive\n20.String with no space either at the beginning or end.\n21.exit");
+			System.out.println("MAIN MENU view");
+			//System.out.println("1.length of a String\n2.convert it into character Array\n3.character at index");
+			System.out.println("1.length of a String\n2.convert it into character Array\n3.character at any index\n4.number of occurrences of a givenletter\n5.greatest position of the given letter\n6.last n characters of a given String\n7.first n characters of a given String\n8.replace the first n characters of a String with XYZ\n9.starts with ent\n10.check whether a String ends with le\n11.convert to uppercase\n12.convert to lowercase\n13.reverse a string\n14.accept a line with multiple Strings\n15. output a Single String without space\n16.each String into aString array\n17.merge each String with character sequence\n18.String are equal -case sensitive \n19.String are equal -case insensitive\n20.String with no space either at the beginning or end.\n21.exit");
 		System.out.println("----------------------------------------");
 		System.out.println("enter your choice");
 		int choice=sc.nextInt();
@@ -53,10 +53,10 @@ public class StringRunner{
     		case 3:
 		System.out.println("enter the string:"); 
             String inputThree=sc.next();
-		System.out.println("enter the string:"); 
+		System.out.println("enter the index:"); 
 		int index=sc.nextInt();
 		
-            System.out.println(task.getPenultimate(inputThree,index));
+            System.out.println(task.getAnyCharacter(inputThree,index));
 		
 		break;
 
@@ -67,7 +67,7 @@ public class StringRunner{
 		System.out.println("enter the character:");
 		char ch4=sc.next().charAt(0);
 		
-		System.out.print(task.occurence(inputFour,ch4));
+		System.out.print(task.getOccurence(inputFour,ch4));
 		
 		System.out.println();
 		break;
@@ -109,11 +109,12 @@ public class StringRunner{
 		case 8:
 		System.out.println("enter the string:");
 		String inputEight=sc.next();
-		
+		System.out.println("enter the no of characters to replace with:");
+		int eight=sc.nextInt();
 		System.out.println("enter the string to be replaced:"); 
 		String replace=sc.next();
 		
-		System.out.println(task.replaceWithString(inputEight,replace));
+		System.out.println(task.replaceWithString(inputEight,eight,replace));
 		
 		break;
 
@@ -183,8 +184,9 @@ public class StringRunner{
 		System.out.println("enter the multiple string to concatenate:");
 		sc.nextLine();
 		String inputFifteen=sc.nextLine();
-		
-		System.out.print(task.noSpace(inputFifteen));
+		System.out.println("enter the delimeter:");
+		String delimiter=sc.next();
+		System.out.print(task.replace(inputFifteen,delimiter));
 		
 		System.out.println();
 		break;
@@ -215,7 +217,7 @@ public class StringRunner{
 		int n17=sc.nextInt();
 		ArrayList<String> words=new ArrayList<String>();
 		
-		for(int i=0;i<n17;i++){
+		for(int i=1;i<=n17;i++){
 			System.out.println("String"+i+":");
 			String str=sc.next();
 			task.checkNull(str);
@@ -263,7 +265,7 @@ public class StringRunner{
 
 		//exit
 		case 21:
-		Sytem.out.println("exited successfully");
+		System.out.println("exited successfully");
 		System.exit(0);
 	}
  	}catch(CustomException ex){

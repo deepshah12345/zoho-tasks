@@ -1,6 +1,6 @@
 package com.zoho.task;
 import com.zoho.exceptions.CustomException;
-import java.util.ArrayList;
+import java.util.List;
 public class Task{
 	public void checkNull(String string) throws CustomException{
 		if(string==null){
@@ -13,12 +13,12 @@ public class Task{
 			throw new CustomException("null character is not allowed");	
 		}
 	}
-	public void bounds(int index,int l) throws CustomException{
-		if(index>l || index<0){
+	public void checkBounds(int index,int l) throws CustomException{
+		if(index>=l || index<0){
 			throw new CustomException("index out of bounds");	
 		}
 	}
-	public void Contains(String target,String string) throws CustomException{
+	public void contains(String target,String string) throws CustomException{
 		checkNull(target);
 		checkNull(string);
 		if(!string.contains(target)){
@@ -34,13 +34,13 @@ public class Task{
 		checkNull(string);
 		return string.toCharArray();
 	}
-	public char getPenultimate(String string,int index)throws CustomException{
+	public char getAnyCharacter(String string,int index)throws CustomException{
 		
 		int length=findLength(string);
-		bounds(index,length);
+		checkBounds(index,length);
 		return string.charAt(index);
 	}
-	public int occurence(String string,char ch)throws CustomException{
+	public int getOccurence(String string,char ch)throws CustomException{
 		checkNull(string);
 		checkCharNull(ch);
 		char array[]=string.toCharArray();		
@@ -61,20 +61,26 @@ public class Task{
 	public String getLastNCharacter(String string,int n)throws CustomException{
 		
 		int length=findLength(string);
-		bounds(length-n,length);
+		checkBounds(length-n,length);
 		return string.substring(length-n,length);
 	}
 	public String getFirstNCharacter(String string,int n)throws CustomException{
 	
 		int length=findLength(string);
-		bounds(n,length);
+		checkBounds(n-1,length);
 		return string.substring(0,n);
 	}
-	public String replaceWithString(String string,String replace)throws CustomException{
+	public String replaceWithString(String string,int n,String stringToReplace)throws CustomException{
 		checkNull(string);
+		checkNull(stringToReplace);
+		return string.replaceFirst(getFirstNCharacter(string,n),stringToReplace);
 		
 		
-		return string.replace(getFirstNCharacter(string,findLength(replace)),replace);
+	}
+	public String replace(String string,String delimiter)throws CustomException{
+		checkNull(string);
+		checkNull(delimiter);
+		return string.replace(delimiter,"");
 	}
 	public boolean startsWithString(String string,String starts)throws CustomException{
 		checkNull(string);
@@ -97,22 +103,22 @@ public class Task{
 	public String reverse(String string)throws CustomException{
 	
 		int length=findLength(string);
-		char[] reversedArray = new char[length];
-		for (int i = 0; i < length; i++) {
-        		reversedArray[i] = string.charAt(length - 1 - i);
+		char[] reversedArray =charArray(string);
+		for (int i = 0; i < length/2; i++) {
+                   char temp = reversedArray[i];
+        		 reversedArray[i] = reversedArray[length - 1 - i];
+       		 reversedArray[length - 1 - i] = temp;
+        		 
             }
 		return new String(reversedArray);
 	}
-	public String noSpace(String string)throws CustomException{
-		checkNull(string);
-		return string.replace(" ","");
-	}
+	
 	public String[] toStringArray(String string,String str)throws CustomException{
 		checkNull(string);
 		checkNull(str);
 		return string.split(str);
 	}
-	public  String stringMerge(ArrayList<String> words,String sequence)throws CustomException{
+	public  String stringMerge(List<String> words,String sequence)throws CustomException{
 		checkNull(sequence);
 		return String.join(sequence,words);
 		
