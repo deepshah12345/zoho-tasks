@@ -1,276 +1,266 @@
 package com.zoho.test;
+
 import com.zoho.task.Task;
 import com.zoho.exceptions.CustomException;
 import java.io.Console;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class StringRunner{
-     public static void main(String args[]){
-     		Task task=new Task();
-		Scanner sc=new Scanner(System.in);
-            Console console=System.console();
-		while(true){
-			System.out.println("----------------------------------------");
-			System.out.println("MAIN MENU view");
-			//System.out.println("1.length of a String\n2.convert it into character Array\n3.character at index");
-			System.out.println("1.length of a String\n2.convert it into character Array\n3.character at any index\n4.number of occurrences of a givenletter\n5.greatest position of the given letter\n6.last n characters of a given String\n7.first n characters of a given String\n8.replace the first n characters of a String with XYZ\n9.starts with ent\n10.check whether a String ends with le\n11.convert to uppercase\n12.convert to lowercase\n13.reverse a string\n14.accept a line with multiple Strings\n15. output a Single String without space\n16.each String into aString array\n17.merge each String with character sequence\n18.String are equal -case sensitive \n19.String are equal -case insensitive\n20.String with no space either at the beginning or end.\n21.exit");
-		System.out.println("----------------------------------------");
-		System.out.println("enter your choice");
-		int choice=sc.nextInt();
-		try{
-		switch(choice){
 
-		//TASK1
-		case 1:
-		//System.out.println("enter the string:");
-		//String inputOne = console.readLine();
-		if(args.length ==0){
-			System.out.println("no arguments passed");
-			
-		}
-		else
-		System.out.println("length:"+task.findLength(args[0]));
-		
-		break;
-	
+public class StringRunner {
 
-		//TASK2
-		case 2:
-            
-		System.out.println("enter the string:");
-		String inputTwo=sc.next();
-		
-            char[] arrayTwo=task.charArray(inputTwo);
-		for(char ch:arrayTwo){
-			System.out.print(ch+" ");
-		}
-		
-	      System.out.println();
-		break;
+    public static void main(String args[]) {
+        Task task = new Task();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("----------------------------------------");
+            System.out.println("MAIN MENU view");
+            System.out.println("1. Length of a String\n2. Convert to character Array\n3. Character at any index\n4. Number of occurrences of a given letter\n5. Greatest position of the given letter\n6. Last n characters of a given String\n7. First n characters of a given String\n8. Replace the first n characters of a String with XYZ\n9. Starts with...\n10. Ends with...\n11. Convert to uppercase\n12. Convert to lowercase\n13. Reverse a string\n14. Accept multiple Strings\n15. Concatenate Strings\n16. String into String array\n17. Merge String with sequence\n18. String equality (case-sensitive)\n19. String equality (case-insensitive)\n20. Remove spaces from the beginning/end\n21. Exit");
+            System.out.println("----------------------------------------");
+            System.out.println("Enter your choice: ");
+            int choice = sc.nextInt();
+            try {
+                switch (choice) {
+                    case 1:
+                        handleStringLength(args, task);
+                        break;
+                    case 2:
+                        handleCharArray(sc, task);
+                        break;
+                    case 3:
+                        handleCharAtIndex(sc, task);
+                        break;
+                    case 4:
+                        handleOccurrences(sc, task);
+                        break;
+                    case 5:
+                        handleGreatestPosition(sc, task);
+                        break;
+                    case 6:
+                        handleLastNCharacters(sc, task);
+                        break;
+                    case 7:
+                        handleFirstNCharacters(sc, task);
+                        break;
+                    case 8:
+                        handleReplaceWithString(sc, task);
+                        break;
+                    case 9:
+                        handleStartsWith(sc, task);
+                        break;
+                    case 10:
+                        handleEndsWith(sc, task);
+                        break;
+                    case 11:
+                        handleToUpperCase(sc, task);
+                        break;
+                    case 12:
+                        handleToLowerCase(sc, task);
+                        break;
+                    case 13:
+                        handleReverse(sc, task);
+                        break;
+                    case 14:
+                        handleMultipleStrings(sc, task);
+                        break;
+                    case 15:
+                        handleConcatenateStrings(sc, task);
+                        break;
+                    case 16:
+                        handleStringArray(sc, task);
+                        break;
+                    case 17:
+                        handleStringMerge(sc, task);
+                        break;
+                    case 18:
+                        handleEqualCaseSensitive(sc, task);
+                        break;
+                    case 19:
+                        handleEqualCaseInsensitive(sc, task);
+                        break;
+                    case 20:
+                        handleRemoveSpaces(sc, task);
+                        break;
+                    case 21:
+                        System.out.println("Exited successfully");
+                        System.exit(0);
+                }
+            } catch (CustomException ex) {
+                System.out.println("Exception occurred: " + ex.getMessage());
+            }
+        }
+    }
 
+    private static void handleStringLength(String[] args, Task task) throws CustomException {
+        if (args.length == 0) {
+            throw new CustomException("No arguments passed");
+        }
+        System.out.println("Length: " + task.findLength(args[0]));
+    }
 
-		//TASK3 
-    		case 3:
-		System.out.println("enter the string:"); 
-            String inputThree=sc.next();
-		System.out.println("enter the index:"); 
-		int index=sc.nextInt();
-		
-            System.out.println(task.getAnyCharacter(inputThree,index));
-		
-		break;
+    private static void handleCharArray(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        char[] array = task.charArray(input);
+        for (char ch : array) {
+            System.out.print(ch + " ");
+        }
+        System.out.println();
+    }
 
-		//TASK4
-		case 4:
-		System.out.println("enter the string:");
-		String inputFour=sc.next();
-		System.out.println("enter the character:");
-		char ch4=sc.next().charAt(0);
-		
-		System.out.print(task.getOccurence(inputFour,ch4));
-		
-		System.out.println();
-		break;
+    private static void handleCharAtIndex(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the index: ");
+        int index = sc.nextInt();
+        System.out.println(task.getCharacterAtIndex(input, index));
+    }
 
-		case 5:
-		//TASK5
-		System.out.println("enter the string:");
-		String inputFive=sc.next();
-		System.out.println("enter the character");
-		char ch5=sc.next().charAt(0);
-		
-		System.out.println(task.getGreatestPosition(inputFive,ch5));
-		
-		break;
+    private static void handleOccurrences(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the character: ");
+        char ch = sc.next().charAt(0);
+        System.out.println(task.getOccurence(input, ch));
+    }
 
-		//task6
-		case 6:
-		System.out.println("enter the string:");
-	      String inputSix=sc.next();
-		System.out.println("no of characters from the last to be printed:");
-		int n6=sc.nextInt();
-		
-		System.out.println(task.getLastNCharacter(inputSix,n6));
-		
-		break;
+    private static void handleGreatestPosition(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the character: ");
+        char ch = sc.next().charAt(0);
+        System.out.println(task.getGreatestPosition(input, ch));
+    }
 
-		//task7
-		case 7:
-		System.out.println("enter the string:");
-		String inputSeven=sc.next();
-		System.out.println("no of characters from the first to be printed:");
-		int n7=sc.nextInt();
-		
-		System.out.println(task.getFirstNCharacter(inputSeven,n7));
-		
-		break;
+    private static void handleLastNCharacters(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Number of characters from the last to be printed: ");
+        int n = sc.nextInt();
+        System.out.println(task.getLastNCharacter(input, n));
+    }
 
-		//task8
-		case 8:
-		System.out.println("enter the string:");
-		String inputEight=sc.next();
-		System.out.println("enter the no of characters to replace with:");
-		int eight=sc.nextInt();
-		System.out.println("enter the string to be replaced:"); 
-		String replace=sc.next();
-		
-		System.out.println(task.replaceWithString(inputEight,eight,replace));
-		
-		break;
+    private static void handleFirstNCharacters(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Number of characters from the first to be printed: ");
+        int n = sc.nextInt();
+        System.out.println(task.getFirstNCharacter(input, n));
+    }
 
-		//task9
-		case 9:
-		System.out.println("enter the string:");
-		String inputNine=sc.next();
-		System.out.println("enter the string to check startswith:");
-		String starts=sc.next();
-		
-		System.out.println(task.startsWithString(inputNine,starts));
-		
-		break;
+    private static void handleReplaceWithString(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the number of characters to replace: ");
+        int n = sc.nextInt();
+        System.out.println("Enter the replacement string: ");
+        String replace = sc.next();
+        System.out.println(task.replaceWithString(input, n, replace));
+    }
 
-		//task10
-		case 10:
-		System.out.println("enter the string:");
-		String inputTen=sc.next();
-		System.out.println("enter the string to check endswith:");
-		String ends=sc.next();
-		
-		System.out.println(task.endsWithString(inputTen,ends));
-		
-		break;
+    private static void handleStartsWith(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the prefix to check: ");
+        String prefix = sc.next();
+        System.out.println(task.startsWithString(input, prefix));
+    }
 
-		//task11
-		case 11:
-		System.out.println("enter the string:");
-		String inputEleven=sc.next();
-		
-		System.out.println(task.toUpper(inputEleven));
-		
-		break;
+    private static void handleEndsWith(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println("Enter the suffix to check: ");
+        String suffix = sc.next();
+        System.out.println(task.endsWithString(input, suffix));
+    }
 
-		//task12
-		case 12:
-		System.out.println("enter the string:");
-		String inputTwelve=sc.next();
-		
-		System.out.println(task.toLower(inputTwelve));
-		
-		break;
+    private static void handleToUpperCase(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println(task.toUpper(input));
+    }
 
-		//task13
-		case 13:
-		System.out.println("enter the string:");
-		String inputThirteen=sc.next();
-		
-		System.out.print(task.reverse(inputThirteen));
-		
-		System.out.println();
-		break;
+    private static void handleToLowerCase(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println(task.toLower(input));
+    }
 
-		//task14
-		case 14:
-		sc.nextLine();
-            System.out.println("enter the multiple string:");
-		String inputFourteen=sc.nextLine();
-		
-		task.checkNull(inputFourteen);
-		System.out.println(inputFourteen);
-		
-		break;
+    private static void handleReverse(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println(task.reverse(input));
+    }
 
-		//task15
-		case 15:
-		System.out.println("enter the multiple string to concatenate:");
-		sc.nextLine();
-		String inputFifteen=sc.nextLine();
-		System.out.println("enter the delimeter:");
-		String delimiter=sc.next();
-		System.out.print(task.replace(inputFifteen,delimiter));
-		
-		System.out.println();
-		break;
+    private static void handleMultipleStrings(Scanner sc, Task task) throws CustomException {
+        sc.nextLine();
+        System.out.println("Enter multiple strings: ");
+        String input = sc.nextLine();
+        task.checkNull(input);
+        System.out.println(input);
+    }
 
-		//task16
-		case 16:
-		System.out.println("enter the string:");
-		String inputSixteen=sc.nextLine();
-		System.out.println("enter the character to split with:");
-		String split=sc.next();
-		
-		String[] array16=task.toStringArray(inputSixteen,split);
-		System.out.print("{");
-		for(int i=0;i<array16.length;i++){
-			System.out.print("\""+array16[i]+"\"");
-			if (i < array16.length - 1){
-               		System.out.print(", ");
-			}
-		}
-		System.out.println("}");
-		
-		
-		break;
-		
-		//task17
-		case 17:
-		System.out.println("enter the number of Strings:");
-		int n17=sc.nextInt();
-		ArrayList<String> words=new ArrayList<String>();
-		
-		for(int i=1;i<=n17;i++){
-			System.out.println("String"+i+":");
-			String str=sc.next();
-			task.checkNull(str);
-			words.add(str);
-		}
-		System.out.println("enter a sequence to merge with:");
-		String sequence=sc.next();
-		System.out.print(task.stringMerge(words,sequence));
-		
-		System.out.println();
-		break;
+    private static void handleConcatenateStrings(Scanner sc, Task task) throws CustomException {
+        sc.nextLine();
+        System.out.println("Enter the multiple strings to concatenate: ");
+        String input = sc.nextLine();
+        System.out.println("Enter the delimiter: ");
+        String delimiter = sc.next();
+        System.out.println("Enter the string to replace: ");
+        String replace = sc.next();
+        System.out.println(task.replace(input, delimiter, replace));
+    }
 
-		//task18
-		case 18:
-		System.out.println("enter the string1:");
-		String string1=sc.next();
-		System.out.println("enter the string2:");
-		String string2=sc.next();
-		
-		System.out.println(task.equalCaseSensitive(string1,string2));
-		
-		break;
+    private static void handleStringArray(Scanner sc, Task task) throws CustomException {
+        sc.nextLine();
+        System.out.println("Enter the string: ");
+        String input = sc.nextLine();
+        System.out.println("Enter the character to split with: ");
+        String split = sc.next();
+        String[] array = task.toStringArray(input, split);
+        System.out.print("{");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print("\"" + array[i] + "\"");
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
+    }
 
-		//task19
-		case 19:
-		System.out.println("enter the string1:");
-		String stringOne=sc.next();
-		System.out.println("enter the string2:");
-		String stringTwo=sc.next();
-		
-		System.out.println(task.equalCaseInSensitive(stringOne,stringTwo));
-		
-		break;
+    private static void handleStringMerge(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the number of strings: ");
+        int n = sc.nextInt();
+        ArrayList<String> words = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            System.out.println("String " + i + ": ");
+            String str = sc.next();
+            task.checkNull(str);
+            words.add(str);
+        }
+        System.out.println("Enter a sequence to merge with: ");
+        String sequence = sc.next();
+        System.out.println(task.stringMerge(words, sequence));
+    }
 
-		//task-20
-		case 20:
-		System.out.println("enter the string:");
-		sc.nextLine();
-		String inputTwenty=sc.nextLine();
-		
-		System.out.println(task.removeSpacesFromBegAndEnd(inputTwenty));
-		
-		break;
-		
+    private static void handleEqualCaseSensitive(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter string 1: ");
+        String string1 = sc.next();
+        System.out.println("Enter string 2: ");
+        String string2 = sc.next();
+        System.out.println(task.equalCaseSensitive(string1, string2));
+    }
 
-		//exit
-		case 21:
-		System.out.println("exited successfully");
-		System.exit(0);
-	}
- 	}catch(CustomException ex){
-		System.out.println("exception occured:"+ex.getMessage());
-		}
-	}
-}
+    private static void handleEqualCaseInsensitive(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter string 1: ");
+        String string1 = sc.next();
+        System.out.println("Enter string 2: ");
+        String string2 = sc.next();
+        System.out.println(task.equalCaseInSensitive(string1, string2));
+    }
+
+    private static void handleRemoveSpaces(Scanner sc, Task task) throws CustomException {
+        System.out.println("Enter the string: ");
+        String input = sc.next();
+        System.out.println(task.removeSpacesFromBegAndEnd(input));
+    }
 }

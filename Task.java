@@ -28,13 +28,13 @@ public class Task{
 	public int findLength(String string) throws CustomException{
 		
 		checkNull(string);
-      	return string.length();
+      		return string.length();
       }
 	public char[] charArray(String string) throws CustomException{
 		checkNull(string);
 		return string.toCharArray();
 	}
-	public char getAnyCharacter(String string,int index)throws CustomException{
+	public char getCharacterAtIndex(String string,int index)throws CustomException{
 		
 		int length=findLength(string);
 		checkBounds(index,length);
@@ -73,14 +73,12 @@ public class Task{
 	public String replaceWithString(String string,int n,String stringToReplace)throws CustomException{
 		checkNull(string);
 		checkNull(stringToReplace);
-		return string.replaceFirst(getFirstNCharacter(string,n),stringToReplace);
-		
-		
+		return string.replaceFirst(getFirstNCharacter(string,n),stringToReplace);	
 	}
-	public String replace(String string,String delimiter)throws CustomException{
+	public String replace(String string,String delimiter,String stringToReplace)throws CustomException{
 		checkNull(string);
 		checkNull(delimiter);
-		return string.replace(delimiter,"");
+		return string.replace(delimiter,stringToReplace);
 	}
 	public boolean startsWithString(String string,String starts)throws CustomException{
 		checkNull(string);
