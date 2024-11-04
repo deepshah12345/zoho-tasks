@@ -13,6 +13,12 @@ public class Task{
 			throw new CustomException("null character is not allowed");	
 		}
 	}
+	public void checkEmptyArguments(String[] args) throws CustomException{
+		 if (args.length == 0) {
+       			 throw new CustomException("No arguments passed");
+                }
+	}
+        
 	public void checkBounds(int index,int l) throws CustomException{
 		if(index>=l || index<0){
 			throw new CustomException("index out of bounds");	
@@ -29,7 +35,7 @@ public class Task{
 		
 		checkNull(string);
       		return string.length();
-      }
+        }
 	public char[] charArray(String string) throws CustomException{
 		checkNull(string);
 		return string.toCharArray();
