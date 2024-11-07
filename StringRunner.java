@@ -2,115 +2,131 @@ package com.zoho.test;
 
 import com.zoho.task.Task;
 import com.zoho.exceptions.CustomException;
-import java.io.Console;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class StringRunner {
+    private Task task;
+    private Scanner sc;
+
+   
+    public StringRunner() {
+        this.task = new Task();
+        this.sc = new Scanner(System.in);
+    }
 
     public static void main(String args[]) {
-        Task task = new Task();
-        Scanner sc = new Scanner(System.in);
-	StringRunner runner=new StringRunner();
-	boolean isBoolean=true;
-        while (isBoolean) {
+        StringRunner runner = new StringRunner();
+        boolean run = true;
+
+        while (run) {
             System.out.println("----------------------------------------");
             System.out.println("MAIN MENU view");
             System.out.println("1. Length of a String\n2. Convert to character Array\n3. Character at any index\n4. Number of occurrences of a given letter\n5. Greatest position of the given letter\n6. Last n characters of a given String\n7. First n characters of a given String\n8. Replace the first n characters of a String with XYZ\n9. Starts with...\n10. Ends with...\n11. Convert to uppercase\n12. Convert to lowercase\n13. Reverse a string\n14. Accept multiple Strings\n15. Concatenate Strings\n16. String into String array\n17. Merge String with sequence\n18. String equality (case-sensitive)\n19. String equality (case-insensitive)\n20. Remove spaces from the beginning/end\n21. Exit");
             System.out.println("----------------------------------------");
             System.out.println("Enter your choice: ");
-            int choice = sc.nextInt();
+            int choice = runner.sc.nextInt();
+
             try {
                 switch (choice) {
                     case 1:
-                        runner.handleStringLength(args, task);
+                        runner.handleStringLength(args);
                         break;
                     case 2:
-                        runner.handleCharArray(sc, task);
+                        runner.handleCharArray();
                         break;
                     case 3:
-                        runner.handleCharAtIndex(sc, task);
+                        runner.handleCharAtIndex();
                         break;
                     case 4:
-                        runner.handleOccurrences(sc, task);
+                        runner.handleOccurrences();
                         break;
                     case 5:
-                        runner.handleGreatestPosition(sc, task);
+                        runner.handleGreatestPosition();
                         break;
                     case 6:
-                        runner.handleLastNCharacters(sc, task);
+                        runner.handleLastNCharacters();
                         break;
                     case 7:
-                        runner.handleFirstNCharacters(sc, task);
+                        runner.handleFirstNCharacters();
                         break;
                     case 8:
-                        runner.handleReplaceWithString(sc, task);
+                        runner.handleReplaceWithString();
                         break;
                     case 9:
-                        runner.handleStartsWith(sc, task);
+                        runner.handleStartsWith();
                         break;
                     case 10:
-                        runner.handleEndsWith(sc, task);
+                        runner.handleEndsWith();
                         break;
                     case 11:
-                        runner.handleToUpperCase(sc, task);
+                        runner.handleToUpperCase();
                         break;
                     case 12:
-                        runner.handleToLowerCase(sc, task);
+                        runner.handleToLowerCase();
                         break;
                     case 13:
-                        runner.handleReverse(sc, task);
+                        runner.handleReverse();
                         break;
                     case 14:
-                        runner.handleMultipleStrings(sc, task);
+                        runner.handleMultipleStrings();
                         break;
                     case 15:
-                        runner.handleConcatenateStrings(sc, task);
+                        runner.handleConcatenateStrings();
                         break;
                     case 16:
-                        runner.handleStringArray(sc, task);
+                        runner.handleStringArray();
                         break;
                     case 17:
-                        runner.handleStringMerge(sc, task);
+                        runner.handleStringMerge();
                         break;
                     case 18:
-                        runner.handleEqualCaseSensitive(sc, task);
+                        runner.handleEqualCaseSensitive();
                         break;
                     case 19:
-                        runner.handleEqualCaseInsensitive(sc, task);
+                        runner.handleEqualCaseInsensitive();
                         break;
                     case 20:
-                        runner.handleRemoveSpaces(sc, task);
+                        runner.handleRemoveSpaces();
                         break;
                     case 21:
                         System.out.println("Exited successfully");
-                        isBoolean=false;
-			break;
-		    default:
-			 System.out.println("enter option between 1-21 ");
+                        run = false;
+                        break;
+                    default:
+                        System.out.println("Enter an option between 1-21");
                 }
             } catch (CustomException ex) {
                 System.out.println("Exception occurred: " + ex.getMessage());
+                ex.printStackTrace();
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    System.out.println("Caused by: " + cause);
+                }
             }
         }
     }
 
-    private  void handleStringLength(String[] args, Task task) throws CustomException {
-        task.checkEmptyArguments(args);
-        System.out.println("Length: " + task.findLength(args[0]));
+    private void handleStringLength(String[] args) throws CustomException {
+        try {
+            task.checkEmptyArguments(args);
+            System.out.println("Length: " + task.findLength(args[0]));
+        } catch (CustomException ex) {
+            throw new CustomException("Exception occurred at args", ex);
+        }
     }
 
-    private  void handleCharArray(Scanner sc, Task task) throws CustomException {
+    private void handleCharArray() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
-        char[] array = task.charArray(input);
+        char[] array = task.getCharArray(input);
         for (char ch : array) {
             System.out.print(ch + " ");
         }
         System.out.println();
     }
 
-    private void handleCharAtIndex(Scanner sc, Task task) throws CustomException {
+    private void handleCharAtIndex() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the index: ");
@@ -118,7 +134,7 @@ public class StringRunner {
         System.out.println(task.getCharacterAtIndex(input, index));
     }
 
-    private  void handleOccurrences(Scanner sc, Task task) throws CustomException {
+    private void handleOccurrences() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the character: ");
@@ -126,7 +142,7 @@ public class StringRunner {
         System.out.println(task.getOccurence(input, ch));
     }
 
-    private  void handleGreatestPosition(Scanner sc, Task task) throws CustomException {
+    private void handleGreatestPosition() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the character: ");
@@ -134,7 +150,7 @@ public class StringRunner {
         System.out.println(task.getGreatestPosition(input, ch));
     }
 
-    private  void handleLastNCharacters(Scanner sc, Task task) throws CustomException {
+    private void handleLastNCharacters() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Number of characters from the last to be printed: ");
@@ -142,7 +158,7 @@ public class StringRunner {
         System.out.println(task.getLastNCharacter(input, n));
     }
 
-    private  void handleFirstNCharacters(Scanner sc, Task task) throws CustomException {
+    private void handleFirstNCharacters() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Number of characters from the first to be printed: ");
@@ -150,7 +166,7 @@ public class StringRunner {
         System.out.println(task.getFirstNCharacter(input, n));
     }
 
-    private  void handleReplaceWithString(Scanner sc, Task task) throws CustomException {
+    private void handleReplaceWithString() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the number of characters to replace: ");
@@ -160,7 +176,7 @@ public class StringRunner {
         System.out.println(task.replaceWithString(input, n, replace));
     }
 
-    private  void handleStartsWith(Scanner sc, Task task) throws CustomException {
+    private void handleStartsWith() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the prefix to check: ");
@@ -168,7 +184,7 @@ public class StringRunner {
         System.out.println(task.startsWithString(input, prefix));
     }
 
-    private  void handleEndsWith(Scanner sc, Task task) throws CustomException {
+    private void handleEndsWith() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println("Enter the suffix to check: ");
@@ -176,25 +192,25 @@ public class StringRunner {
         System.out.println(task.endsWithString(input, suffix));
     }
 
-    private  void handleToUpperCase(Scanner sc, Task task) throws CustomException {
+    private void handleToUpperCase() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println(task.toUpper(input));
     }
 
-    private  void handleToLowerCase(Scanner sc, Task task) throws CustomException {
+    private void handleToLowerCase() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println(task.toLower(input));
     }
 
-    private void handleReverse(Scanner sc, Task task) throws CustomException {
+    private void handleReverse() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println(task.reverse(input));
     }
 
-    private void handleMultipleStrings(Scanner sc, Task task) throws CustomException {
+    private void handleMultipleStrings() throws CustomException {
         sc.nextLine();
         System.out.println("Enter multiple strings: ");
         String input = sc.nextLine();
@@ -202,7 +218,7 @@ public class StringRunner {
         System.out.println(input);
     }
 
-    private  void handleConcatenateStrings(Scanner sc, Task task) throws CustomException {
+    private void handleConcatenateStrings() throws CustomException {
         sc.nextLine();
         System.out.println("Enter the multiple strings to concatenate: ");
         String input = sc.nextLine();
@@ -213,7 +229,7 @@ public class StringRunner {
         System.out.println(task.replace(input, delimiter, replace));
     }
 
-    private  void handleStringArray(Scanner sc, Task task) throws CustomException {
+    private void handleStringArray() throws CustomException {
         sc.nextLine();
         System.out.println("Enter the string: ");
         String input = sc.nextLine();
@@ -230,7 +246,7 @@ public class StringRunner {
         System.out.println("}");
     }
 
-    private  void handleStringMerge(Scanner sc, Task task) throws CustomException {
+    private void handleStringMerge() throws CustomException {
         System.out.println("Enter the number of strings: ");
         int n = sc.nextInt();
         ArrayList<String> words = new ArrayList<>();
@@ -245,7 +261,8 @@ public class StringRunner {
         System.out.println(task.stringMerge(words, sequence));
     }
 
-    private  void handleEqualCaseSensitive(Scanner sc, Task task) throws CustomException {
+
+    private void handleEqualCaseSensitive() throws CustomException {
         System.out.println("Enter string 1: ");
         String string1 = sc.next();
         System.out.println("Enter string 2: ");
@@ -253,7 +270,7 @@ public class StringRunner {
         System.out.println(task.equalCaseSensitive(string1, string2));
     }
 
-    private  void handleEqualCaseInsensitive(Scanner sc, Task task) throws CustomException {
+    private void handleEqualCaseInsensitive() throws CustomException {
         System.out.println("Enter string 1: ");
         String string1 = sc.next();
         System.out.println("Enter string 2: ");
@@ -261,7 +278,7 @@ public class StringRunner {
         System.out.println(task.equalCaseInSensitive(string1, string2));
     }
 
-    private void handleRemoveSpaces(Scanner sc, Task task) throws CustomException {
+    private void handleRemoveSpaces() throws CustomException {
         System.out.println("Enter the string: ");
         String input = sc.next();
         System.out.println(task.removeSpacesFromBegAndEnd(input));

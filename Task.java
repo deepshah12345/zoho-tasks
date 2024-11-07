@@ -14,8 +14,14 @@ public class Task{
 		}
 	}
 	public void checkEmptyArguments(String[] args) throws CustomException{
+		checkNull(args[0]);
 		 if (args.length == 0) {
-       			 throw new CustomException("No arguments passed");
+       			// throw new CustomException("No arguments passed");
+			// CustomException exception = new CustomException("No arguments passed");
+                         //exception.initCause(new IllegalArgumentException("Arguments array is empty"));
+                        // throw exception;
+			throw new CustomException("No arguments passed", new IllegalArgumentException("Arguments array is empty"));
+    
                 }
 	}
         
@@ -36,7 +42,7 @@ public class Task{
 		checkNull(string);
       		return string.length();
         }
-	public char[] charArray(String string) throws CustomException{
+	public char[] getCharArray(String string) throws CustomException{
 		checkNull(string);
 		return string.toCharArray();
 	}
@@ -107,7 +113,7 @@ public class Task{
 	public String reverse(String string)throws CustomException{
 	
 		int length=findLength(string);
-		char[] reversedArray =charArray(string);
+		char[] reversedArray =getCharArray(string);
 		for (int i = 0; i < length/2; i++) {
                    char temp = reversedArray[i];
         		 reversedArray[i] = reversedArray[length - 1 - i];
