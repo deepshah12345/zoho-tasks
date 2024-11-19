@@ -9,12 +9,11 @@ import java.util.ArrayList;
 public class StringRunner {
     private Task task;
     private Scanner sc;
-    private Utility utility;
-   
+    
     public StringRunner() {
         this.task = new Task();
         this.sc = new Scanner(System.in);
-	this.utility=new Utility();
+	
 
     }
 
@@ -112,7 +111,7 @@ public class StringRunner {
 
    private void handleStringLength(String[] args) throws CustomException {
     try {
-        utility.checkEmptyArguments(args);
+        Utility.checkEmptyArguments(args);
         System.out.println("Length: " + task.findLength(args[0]));
     } catch (CustomException ex) {
         throw new CustomException("Exception occurred at runner", ex);
@@ -266,7 +265,7 @@ private void handleMultipleStrings() throws CustomException {
         sc.nextLine();
         System.out.println("Enter multiple strings: ");
         String input = sc.nextLine();
-        utility.checkNull(input);
+        Utility.checkNull(input);
         System.out.println(input);
     } catch (CustomException ex) {
         throw new CustomException("Exception occurred at runner", ex);
@@ -317,7 +316,7 @@ private void handleStringMerge() throws CustomException {
         for (int i = 1; i <= n; i++) {
             System.out.println("String " + i + ": ");
             String str = sc.next();
-            utility.checkNull(str);
+            Utility.checkNull(str);
             words.add(str);
         }
         System.out.println("Enter a sequence to merge with: ");

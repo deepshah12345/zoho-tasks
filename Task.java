@@ -3,10 +3,7 @@ import com.zoho.exceptions.CustomException;
 import com.zoho.utility.Utility;
 import java.util.List;
 public class Task{
-	private Utility utility;
-	public Task(){
-		this.utility=new Utility();
-	}
+	
 	//public void contains(String target,String string) throws CustomException{
 	//	checkNull(target);
 	//	checkNull(string);
@@ -16,22 +13,22 @@ public class Task{
 	//}	 
 	public int findLength(String string) throws CustomException{
 		
-		utility.checkNull(string);
+		Utility.checkNull(string);
       		return string.length();
         }
 	public char[] getCharArray(String string) throws CustomException{
-		utility.checkNull(string);
+		Utility.checkNull(string);
 		return string.toCharArray();
 	}
 	public char getCharacterAtIndex(String string,int index)throws CustomException{
 		
 		int length=findLength(string);
-		utility.checkBounds(index,length);
+		Utility.checkBounds(index,length);
 		return string.charAt(index);
 	}
 	public int getOccurence(String string,char ch)throws CustomException{
-		utility.checkNull(string);
-		utility.checkCharNull(ch);
+		Utility.checkNull(string);
+		Utility.checkCharNull(ch);
 		char array[]=string.toCharArray();		
 		int count=0;
 		for(char character:array){
@@ -42,49 +39,49 @@ public class Task{
 		return count;
 	}
 	public int getGreatestPosition(String string,char ch)throws CustomException{
-		utility.checkNull(string);
-		utility.checkCharNull(ch);
+		Utility.checkNull(string);
+		Utility.checkCharNull(ch);
 		return string.lastIndexOf(ch);
 	}
       
 	public String getLastNCharacter(String string,int n)throws CustomException{
 		
 		int length=findLength(string);
-		utility.checkBounds(length-n,length);
+		Utility.checkBounds(length-n,length);
 		return string.substring(length-n,length);
 	}
 	public String getFirstNCharacter(String string,int n)throws CustomException{
 	
 		int length=findLength(string);
-		utility.checkBounds(n-1,length);
+		Utility.checkBounds(n-1,length);
 		return string.substring(0,n);
 	}
 	public String replaceWithString(String string,int n,String stringToReplace)throws CustomException{
-		utility.checkNull(string);
-		utility.checkNull(stringToReplace);
+		Utility.checkNull(string);
+		Utility.checkNull(stringToReplace);
 		return string.replaceFirst(getFirstNCharacter(string,n),stringToReplace);	
 	}
 	public String replace(String string,String delimiter,String stringToReplace)throws CustomException{
-		utility.checkNull(string);
-		utility.checkNull(delimiter);
+		Utility.checkNull(string);
+		Utility.checkNull(delimiter);
 		return string.replace(delimiter,stringToReplace);
 	}
 	public boolean startsWithString(String string,String starts)throws CustomException{
-		utility.checkNull(string);
-		utility.checkNull(starts);
+		Utility.checkNull(string);
+		Utility.checkNull(starts);
 		return string.startsWith(starts);
 	}
 	public boolean endsWithString(String string,String ends)throws CustomException{
-		utility.checkNull(string);
-		utility.checkNull(ends);
+		Utility.checkNull(string);
+		Utility.checkNull(ends);
 		return string.endsWith(ends);
 	}
 	public String toUpper(String string)throws CustomException{
-		utility.checkNull(string);
+		Utility.checkNull(string);
 		return string.toUpperCase();
 	}
 	public String toLower(String string)throws CustomException{
-		utility.checkNull(string);
+		Utility.checkNull(string);
 		return string.toLowerCase();
 	}
 	public String reverse(String string)throws CustomException{
@@ -101,28 +98,28 @@ public class Task{
 	}
 	
 	public String[] toStringArray(String string,String str)throws CustomException{
-		utility.checkNull(string);
-		utility.checkNull(str);
+		Utility.checkNull(string);
+		Utility.checkNull(str);
 		return string.split(str);
 	}
 	public  String stringMerge(List<String> words,String sequence)throws CustomException{
-		utility.checkNull(sequence);
+		Utility.checkNull(sequence);
 		return String.join(sequence,words);
 		
 	}
 	public boolean equalCaseSensitive(String string1,String string2)throws CustomException{
-		utility.checkNull(string1);
-		utility.checkNull(string2);
+		Utility.checkNull(string1);
+		Utility.checkNull(string2);
 		return string1.equals(string2);
 	}
 
 	public boolean equalCaseInSensitive(String string1,String string2)throws CustomException{
-		utility.checkNull(string1);
-		utility.checkNull(string2);
+		Utility.checkNull(string1);
+		Utility.checkNull(string2);
 		return string1.equalsIgnoreCase(string2);
 	}
 	public String removeSpacesFromBegAndEnd(String string)throws CustomException{
-		utility.checkNull(string);
+		Utility.checkNull(string);
 		return string.trim();
 	}
 
