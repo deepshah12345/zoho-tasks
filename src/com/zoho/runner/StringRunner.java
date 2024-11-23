@@ -20,7 +20,7 @@ public class StringRunner {
     public static void main(String args[]) {
         StringRunner runner = new StringRunner();
         boolean run = true;
-
+try{
         while (run) {
             System.out.println("----------------------------------------");
             System.out.println("MAIN MENU view");
@@ -107,6 +107,11 @@ public class StringRunner {
                // }
             }
         }
+	}finally{
+  		runner.sc.close();
+        	System.out.println("Scanner closed successfully.");
+    	}
+
     }
 
    private void handleStringLength(String[] args) throws CustomException {
